@@ -1,0 +1,59 @@
+ ---------------------------------------------------
+ |               MAHLERAN  v1.2.2                  |
+ |      code (c) J. Wainwright, E.N. Mueller,      |
+ |    L. Turnbull, R.E. Brazier, J.R. Cooper,      |
+ |       C.J.M. Hewett, B. Fenti, B. Tjetien       |
+ |                  1997 - 2015                    |
+ | contact John.Wainwright@dur.ac.uk for details   |
+ |      Output time  0:30:49 on 14/ 6/2019         |
+ ---------------------------------------------------
+
+ ---------------------------------------------------
+
+ Run: 
+
+ Laurap1                                                                         
+
+ ---------------------------------------------------
+
+ Input folder: .\Input\input_p1\
+ Output folder: .\Output\
+ Topography read in from .\Input\input_p1\p1dem.asc                                                      
+ Infiltration parameter type: deterministic or stochastic usin
+ Mean Ksat: 0.9000E+00 mm/h
+ Standard deviation of Ksat: 0.1000E-02
+ Mean wetting-front suction: 0.4660E+02 mm
+ Standard deviation of wetting-front suction: 0.1000E+00 mm
+ Mean drainage parameter: 0.5000E-01 mm/h
+ S.d. drainage parameter: 0.0000E+00 mm/h
+ Smith and Parlange (1978) infiltration model with ksat derived from Hawkins exponential based on pavement cover and rainfall intensity 
+ Initial soil moisture read in from file: .\Input\input_p1\p1sm290905.asc                                                 
+ Saturated soil moisture read in from file: .\Input\input_p1\thetasat39.asc                                                 
+ Soil thickness: 0.3000E+00 m
+ Friction factor parameter type:        deterministic
+ Mean friction factor: 0.2145E+02
+ Vegetation read in from file: .\Input\input_p1\p1vegcover.asc                                                 
+ Rainfall model: 2. defined in file: p1_01_08_06.dat                                                                 
+ Rainfall mask data read in from file: .\Input\input_p1\rm_new.asc                                                     
+ Flow routing using 4 flow directions 
+ Flow routing using Scoging Method 
+ Sediment routing using Crank-Nicolson with Newton-Raphson solution 
+ Without topography updating 
+ Storm timestep:    1.00 s 
+ Particle density:    2.65 g/m3
+ Active layer sensitivity:  0.0000
+ Nutrient parameter CS : ammonium, 0.1250E+02; nitrate, 0.1495E+02; phosphorus, 0.6100E+02
+ Mass-transfer coefficients : ammonium, 0.3000E-04; nitrate, 0.7000E-04; phosphorus, 0.4000E-04
+ Raindrop detachment a parameter: 0.3542E-07 0.6725E-06 0.4250E-06 0.6725E-06 0.6725E-07 0.7075E-08
+ Raindrop detachment b parameter: 0.1200E+01 0.1080E+01 0.7900E+00 0.7500E+00 0.7500E+00 0.5000E+00
+ Raindrop detachment c parameter: 0.2300E+00 0.2100E+00 0.1100E+00 0.1060E+01 0.1000E+00 0.1000E+00
+ Raindrop detachment maximum parameter: 0.1000E+04 0.1000E+04 0.1000E+04 0.1000E+04 0.1000E+04 0.1000E+04
+ Ksat multiplication factor: 0.1000E+01
+ Psi  multiplication factor: 0.1000E+01
+ particulate-bound ammonium conc: 0.1900E-01 0.1600E-01 0.7000E-02 0.3000E-02 0.0000E+00 0.0000E+00
+ particulate-bound nitrate conc: 0.2000E-02 0.2000E-02 0.3000E-02 0.2000E-02 0.0000E+00 0.0000E+00
+ particulate-bound TN conc: 0.3065E+01 0.2249E+01 0.1260E+01 0.7200E+00 0.0000E+00 0.0000E+00
+ particulate-bound TP conc: 0.9180E+00 0.6500E+00 0.5920E+00 0.4510E+00 0.0000E+00 0.0000E+00
+ particulate-bound IC conc: 0.8933E+01 0.6300E+01 0.4150E+01 0.2550E+01 0.0000E+00 0.0000E+00
+ particulate-bound TC conc: 0.3163E+02 0.2986E+02 0.1325E+02 0.6725E+01 0.0000E+00 0.0000E+00
+ Soluble rainfall nutrients : ammonium, 0.2300E+00; nitrate, 0.2120E+00; phosphorus, 0.1100E-01

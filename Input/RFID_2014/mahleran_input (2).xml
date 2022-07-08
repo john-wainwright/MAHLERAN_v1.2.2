@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mahleran_input name="rfid_2014">
+  <version value="1.2.1" />
+  <model_type value="1" />
+  <runtype value="event" />
+  <time_step value="1.0" />
+  <input_folder value=".\Input\RFID_2014\" />
+  <output_folder value=".\Output\RFID_2014\" />
+  <dem value="rfid_2014_dem1.asc" />
+  <rainfall_data value="rfid_2014_rainfall.dat" />
+  <rainfall-scaling_map value="rfid_2014_scaling1.asc" />
+  <vegetation-cover_map value="rfid_2014_veg.asc" />
+  <pavement_map value="rfid_2014_pave.asc" />
+  <surface-type_map value="rfid_2014_surf.asc" />
+  <rain_type value="2" />
+  <stormlength value="700.0" />
+  <mean_rainfall value="138.1068" />
+  <std_dev_rainfall value="0.0" />
+  <skewness_rainfall value="0.0" />
+  <infiltration_model value="1" />
+  <final_infiltration_map value="rfid_2014_inf.asc" />
+  <suction_map value="" />
+  <drainage-map_map value="" />
+  <infiltration-parameter_type value="1" />
+  <drainage-parameter_type value="4" />
+  <number_of_surface_types value="1" />
+  <final_infiltration_rate_mean values="by_surface_type">
+    <type_1>0.01</type_1>
+  </final_infiltration_rate_mean>
+  <final_infiltration_std_dev values="by_surface_type">
+    <type_1>0.001</type_1>
+  </final_infiltration_std_dev>
+  <wetting_front_suction_mean values="by_surface_type">
+    <type_1>150.0</type_1>
+  </wetting_front_suction_mean>
+  <wetting_front_suction_std_dev values="by_surface_type">
+    <type_1>0.0</type_1>
+  </wetting_front_suction_std_dev>
+  <drainage_parameter_mean values="by_surface_type">
+    <type_1>0.05</type_1>
+  </drainage_parameter_mean>
+  <drainage_parameter_std_dev values="by_surface_type">
+    <type_1>0.0</type_1>
+  </drainage_parameter_std_dev>
+  <initial_soil_moisture_mean values="by_surface_type">
+    <type_1>0.004</type_1>
+  </initial_soil_moisture_mean>
+  <initial_soil_moisture_std_dev values="by_surface_type">
+    <type_1>0.0</type_1>
+  </initial_soil_moisture_std_dev>
+  <soil_thickness values="by_surface_type">
+    <type_1>1.21</type_1>
+  </soil_thickness>
+  <initial_soil-moisture_map value="rfid_2014_ism_004.asc" />
+  <saturated_soil-moisture_map value="rfid_2014_ssm_036.asc" />
+  <use_final_infiltration_map value="false" />
+  <use_suction_map value="false" />
+  <use_drainage_map value="false" />
+  <use_initial_soil_moisture_map value="true" />
+  <use_saturated_soil_moisture_map value="true" />
+  <finalInfiltrationRateDistribution value="normal" />
+  <wettingFrontSuctionDistribution value="deterministic" />
+  <drainageParameterDistribution value="deterministic" />
+  <initialSoilMoistureDistribution value="deterministic" />
+  <saturatedSoilMoistureDistribution value="deterministic" />
+  <flow_direction value="4" />
+  <flow-routing_solution_method value="2" />
+  <friction_factor_type value="1" />
+  <friction_factor_map value="" />
+  <friction_factor_mean values="by_surface_type">
+    <type_1>8.71</type_1>
+  </friction_factor_mean>
+  <friction_factor_std_dev values="by_surface_type">
+    <type_1>0.0</type_1>
+  </friction_factor_std_dev>
+  <use_friction_factor_map value="false" />
+  <frictionFactorDistribution value="deterministic" />
+    <particle_size_map values="by_particle_size">
+    <phi_1 "rfid_2014_phi1.asc"/>
+    <phi_2 "rfid_2014_phi2.asc"/>
+    <phi_3 "rfid_2014_phi3.asc"/>
+    <phi_4 "rfid_2014_phi4.asc"/>
+    <phi_5 "rfid_2014_phi5.asc"/>
+    <phi_6 "rfid_2014_phi6.asc"/>
+  </particle_size_map>
+  <use_map_phi value="true" />
+  <mean_particle_size values="by_surface_type">
+    <type>1</type>
+    <phi_1>0.2</phi_1>
+    <phi_2>0.2</phi_2>
+    <phi_3>0.2</phi_3>
+    <phi_4>0.2</phi_4>
+    <phi_5>0.1</phi_5>
+    <phi_6>0.1</phi_6>
+  </mean_particle_size>
+  <std_dev_particle_size values="by_surface_type">
+    <type>1</type>
+    <phi_1>0.0</phi_1>
+    <phi_2>0.0</phi_2>
+    <phi_3>0.0</phi_3>
+    <phi_4>0.0</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </std_dev_particle_size>
+  <particle_density value="2.65" />
+  <Raindrop_detachment_a_parameter_size values="by_particle_size">
+    <phi_1>4.25E-5</phi_1>
+    <phi_2>8.07E-4</phi_2>
+    <phi_3>5.1E-4</phi_3>
+    <phi_4>8.07E-4</phi_4>
+    <phi_5>8.07E-5</phi_5>
+    <phi_6>8.49E-6</phi_6>
+  </Raindrop_detachment_a_parameter_size>
+  <Raindrop_detachment_b_parameter_size values="by_particle_size">
+    <phi_1>1.2</phi_1>
+    <phi_2>1.08</phi_2>
+    <phi_3>0.79</phi_3>
+    <phi_4>0.75</phi_4>
+    <phi_5>0.75</phi_5>
+    <phi_6>0.5</phi_6>
+  </Raindrop_detachment_b_parameter_size>
+  <Raindrop_detachment_c_parameter_size values="by_particle_size">
+    <phi_1>0.23</phi_1>
+    <phi_2>0.21</phi_2>
+    <phi_3>0.11</phi_3>
+    <phi_4>1.06</phi_4>
+    <phi_5>0.1</phi_5>
+    <phi_6>0.1</phi_6>
+  </Raindrop_detachment_c_parameter_size>
+  <Raindrop_detachment_d_parameter_size values="by_particle_size">
+    <phi_1>9.844</phi_1>
+    <phi_2>7.464</phi_2>
+    <phi_3>8.184</phi_3>
+    <phi_4>8.386</phi_4>
+    <phi_5>27.17</phi_5>
+    <phi_6>679.2</phi_6>
+  </Raindrop_detachment_d_parameter_size>
+  <Raindrop_detachment_max_parameter_size values="by_particle_size">
+    <phi_1>1000.0</phi_1>
+    <phi_2>1000.0</phi_2>
+    <phi_3>1000.0</phi_3>
+    <phi_4>1000.0</phi_4>
+    <phi_5>1000.0</phi_5>
+    <phi_6>1000.0</phi_6>
+  </Raindrop_detachment_max_parameter_size>
+  <sediment-routing_solution_method value="2" />
+  <update_topography value="n" />
+  <topography_update_interval value="1" />
+  <particle_density value="2.65" />
+  <active_layer_sensitivity value="1.52E-6" />
+  <Cs_NH4 value="12.5" />
+  <Cs_NO3 value="14.95" />
+  <Cs_PO value="61.0" />
+  <mass-transfer_coefficient_NH4 value="3.0E-5" />
+  <mass-transfer_coefficient_NO3 value="7.0E-5" />
+  <mass-transfer_coefficient_PO value="4.0E-5" />
+  <Particulate_bound_NH4 values="by_particle_size">
+    <phi_1>0.019</phi_1>
+    <phi_2>0.016</phi_2>
+    <phi_3>0.007</phi_3>
+    <phi_4>0.003</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </Particulate_bound_NH4>
+  <Particulate_bound_NO3 values="by_particle_size">
+    <phi_1>0.002</phi_1>
+    <phi_2>0.002</phi_2>
+    <phi_3>0.003</phi_3>
+    <phi_4>0.002</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </Particulate_bound_NO3>
+  <Particulate_bound_TN values="by_particle_size">
+    <phi_1>3.065</phi_1>
+    <phi_2>2.249</phi_2>
+    <phi_3>1.26</phi_3>
+    <phi_4>0.72</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </Particulate_bound_TN>
+  <Particulate_bound_TP values="by_particle_size">
+    <phi_1>0.918</phi_1>
+    <phi_2>0.65</phi_2>
+    <phi_3>0.592</phi_3>
+    <phi_4>0.451</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </Particulate_bound_TP>
+  <Particulate_bound_IC values="by_particle_size">
+    <phi_1>8.933</phi_1>
+    <phi_2>6.3</phi_2>
+    <phi_3>4.15</phi_3>
+    <phi_4>2.55</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </Particulate_bound_IC>
+  <Particulate_bound_TC values="by_particle_size">
+    <phi_1>31.628</phi_1>
+    <phi_2>29.858</phi_2>
+    <phi_3>13.25</phi_3>
+    <phi_4>6.725</phi_4>
+    <phi_5>0.0</phi_5>
+    <phi_6>0.0</phi_6>
+  </Particulate_bound_TC>
+  <rainfall_dissolved_NH4_conc value="0.23" />
+  <rainfall_dissolved_NO3_conc value="0.212" />
+  <rainfall_dissolved_PO_conc value="0.011" />
+  <KE_model_type value="2" />
+  <verbose_output value="false" />
+ <within_storm_output value="false" />
+ <within_storm_interval value="60" />
+  <mahleran_continuous name="data for continuous runs">
+    <interstorm_input_folder>C:\John\Programs\Gustav_V1\Input\Interstorm_abbott\</interstorm_input_folder>
+    <start_year>2010</start_year>
+    <end_year>2011</end_year>
+    <start_month>1</start_month>
+    <end_month>12</end_month>
+    <continuous_temperature_data>Sev_temp.dat</continuous_temperature_data>
+    <continuous_rainfall_data>Met_rain.dat</continuous_rainfall_data>
+    <one-min_rainfall_data>Met_rain.dat</one-min_rainfall_data>
+    <shrub-cover_map>shrub_cv.asc</shrub-cover_map>
+    <threshold_rain>5.0</threshold_rain>
+    <latitude>0.593</latitude>
+    <latitude_degrees>34.0</latitude_degrees>
+    <depth_of_upper_layer>150.0</depth_of_upper_layer>
+    <depth_of_lower_layer>150.0</depth_of_lower_layer>
+    <residual_water_content>0.03</residual_water_content>
+    <water_content_for_stomatal_closure>0.2</water_content_for_stomatal_closure>
+    <crusting_evapotranspiration_reduction>1.0</crusting_evapotranspiration_reduction>
+    <infiltration_from_bare_to_layer_2>0.1</infiltration_from_bare_to_layer_2>
+    <infiltration_from_shrub_to_layer_2>0.1</infiltration_from_shrub_to_layer_2>
+    <ksat>0.6</ksat>
+    <diffusion_coefficient>0.01</diffusion_coefficient>
+    <initial_value_for_sm_1>10.0</initial_value_for_sm_1>
+    <initial_value_for_sm_2>10.0</initial_value_for_sm_2>
+  </mahleran_continuous>
+  <mahleran_mic name="data for Marker-in-Cell runs">
+    <marker_file>rfid_2014_markers_1200.asc</marker_file>
+  </mahleran_mic>
+  <mahleran_output_files name="output file selection">
+    <aspectfileimg>true</aspectfileimg>
+    <contrib>false</contrib>
+    <d_xsect>false</d_xsect>
+    <depfileimg>false</depfileimg>
+    <detfileimg>true</detfileimg>
+    <dfileimg>true</dfileimg>
+    <dischfile>false</dischfile>
+    <dmapfile>true</dmapfile>
+    <flowdetimg>false</flowdetimg>
+    <hydrofile>true</hydrofile>
+    <hypointsfile>false</hypointsfile>
+    <inundfile>false</inundfile>
+    <ksat_output>true</ksat_output>
+    <markerfileimg>false</markerfileimg>
+    <markerofffile>false</markerofffile>
+    <mstatusfile>false</mstatusfile>
+    <MXYfile>false</MXYfile>
+    <neterosimg>true</neterosimg>
+    <nutpointfile>false</nutpointfile>
+    <nutrientfile>false</nutrientfile>
+    <nutrifileimg>false</nutrifileimg>
+    <nitratefileimg>false</nitratefileimg>
+    <phosfileimg>false</phosfileimg>
+    <order>false</order>
+    <p_ammoniumimg>false</p_ammoniumimg>
+    <p_ICimg>false</p_ICimg>
+    <p_nitrateimg>false</p_nitrateimg>
+    <p_nutfile>false</p_nutfile>
+    <p_TCimg>false</p_TCimg>
+    <p_TNimg>false</p_TNimg>
+    <p_TPimg>false</p_TPimg>
+    <paramfile>true</paramfile>
+    <pave>false</pave>
+    <q_xsect>false</q_xsect>
+    <qfileimg>true</qfileimg>
+    <qpointfile>false</qpointfile>
+    <qspointfile>false</qspointfile>
+    <raindetimg>false</raindetimg>
+    <rainmask>false</rainmask>
+    <sedconcfile>false</sedconcfile>
+    <seddeposfile>false</seddeposfile>
+    <seddepthfile>false</seddepthfile>
+    <seddetfile>false</seddetfile>
+    <seddischfile>true</seddischfile>
+    <sedfile>true</sedfile>
+    <sedfileimg>true</sedfileimg>
+    <sedpropnfile>false</sedpropnfile>
+    <sedvelfile>false</sedvelfile>
+    <shrubland_xsect>false</shrubland_xsect>
+    <slope>false</slope>
+    <soildepfileimg>false</soildepfileimg>
+    <soilvelfileimg>false</soilvelfileimg>
+    <thetafileimg>false</thetafileimg>
+    <topog>false</topog>
+    <v_xsect>false</v_xsect>
+    <veg>false</veg>
+    <vfileimg>true</vfileimg>
+  </mahleran_output_files>
+</mahleran_input>

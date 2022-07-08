@@ -1,0 +1,56 @@
+Parameter specification for Mahleran Version 1.01.4
+./Input/Test2_Abbott_300700/
+./Output/
+adem0402_2
+ab_veg_cal
+300700a.dat
+ab_inf3_300700
+arm0402_2
+ab_pave_cal
+ab_cover_cal
+1 #model_type: use 1
+1 #inf_type: 1) f(av. rainfall, pavement) 2) f(ksave,kssd) 3) f(rainfall, pavement) 4)uses ksat map read in from file
+1 #inf_model: 1) Smith and Parlange (1978), 2) S. & P. with exponential approx.
+0.01  0.3   0.17   0.2 #ksave: mean Ksat [mm/s]
+0.00  0.0088   0.0083   0.0083 #kssd: Std. Dev. of Ksat [mm/s]
+46.6  50   50   50 #psiave: mean wetting front suction [mm]
+0   1   1   1 #psisd: Std. Dev. of psiave [mm]
+0.05   0.05   0.05   0.05 #drain_par_ave: mean drainage parameter
+0.0   0.1   0.1   0.1 #drain_par_sd: Std. Dev. of drain_par_ave
+absm300700
+abthetasat
+0.30  1   1   1	#soil_thick: soil thickness (effective depth to wetting front) [m]
+3 #ff_type	friction factor parameter type: 1) deterministic, 2, stochastic, 3) feedback
+2   26   120   1.5 #ffave: average friction factor [-]	
+0.0   10   20   0.3 #ffsd: Std. Dev. of ffave [-]
+2 #rain_type: 1) constant average rainfall, 2) storm read in from file
+1980 #stormlength: length of simulated storm [s]
+34.7   0   0 #rf_mean, rfvar1, rfvar2: mean rainfall, Std. Dev. and Skewness [mm/h]                                        
+4 #ndirn: flow direction in routing model, must be 4
+1 #iroute: flow-routing solution method
+1.0 #dt: time steps [s]
+1 #itype: ignore, leave set to 1
+2.65 #density: particle density [g/cm-3]
+152.0d-6 #hz: active layer sensitivity, Note zero here switches off conc erosion
+ab_phi1
+ab_phi2
+ab_phi3
+ab_phi4
+ab_phi5
+ab_phi6
+0.0d0  0.0d0  0.0d0  0.0d0  0.0d0  0.0d0 #ps_init_sd: Std. Dev. of phi
+33.   12.  61. #Cs nutrient parameter (NH4, NO3, PO) [mg/l]
+3.E-5  7E-5  4.E-5 #alpha: mass transfer coefficient (NH4, NO3, PO) [mm/s]
+3.50E-05 6.65E-04 4.20E-04 6.65E-04 6.65E-05 7.00E-06 #spa: Raindrop detachment a parameter [-]
+1.24d0 1.08d0 .79d0 0.75d0 0.75d0 0.5d0	#spb: Raindrop detachment b parameter [-]
+.23d0 .21d0 .11d0 1.06d0 0.1d0 0.1d0 #spc: Raindrop detachment c parameter [-]
+1.d3 1.d3 1.d3 1.d3 1.d3 1.d3 #hs: Raindrop detachment max parameter [-]
+14.49275 10.98901 12.04819 12.34568 40.0 1000.0 /spd: Raindrop detachment d parameter [-]
+0.019 0.016 0.007 0.003 0.000 0.000 #p_ammonium: Particulate_bound NH4 conc.
+0.002 0.002 0.003 0.002 0.000 0.000 #p_nitrate: Particulate_bound NO3 conc.
+3.065 2.249 1.260 0.720 0.000 0.000 #p_TN: Particulate_bound TN conc.
+0.918 0.650 0.592 0.451 0.000 0.000 #p_TP: Particulate_bound Tp conc.
+8.933 6.300 4.150 2.550 0.000 0.000 #p_IC: Particulate_bound IC conc.
+31.628 29.858 13.250 6.725 0.000 0.000 #p_TC: Particulate_bound TC conc.
+0.23 0.212 0.011 #Rn: rainfall dissolved nutrient conc.
+

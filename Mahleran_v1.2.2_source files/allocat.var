@@ -1,0 +1,174 @@
+     allocate (slope (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating slope!"
+	 allocate (profc (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating profc!"
+	 allocate (planc (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating planc!"
+	 allocate (aspect (nr2, nc2), source = 0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating aspect!"
+!JWFeb05   now calculated dynamically in the main body
+!JWFeb05   to account for masked-off areas
+!JWFeb05	 allocate (order ((nr - 1) * (nc - 1), 3))
+	 allocate (veg (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating veg!"
+	 allocate (cover(nr2, nc2), source = 0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating cover!"
+	 allocate (theta_0(nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating theta_0!"
+	 allocate (theta_sat(nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating theta_sat!"
+	 allocate (sminit(nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating sminit!"
+	 allocate (ciinit(nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating ciinit!"
+	 allocate (is_rill (nr2, nc2), source = 0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating is_rill!"
+	 allocate (d (2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating d!"
+	 allocate (q (2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating q!"
+	 allocate (d_soil (6,2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating d_soil!"
+	 allocate (q_soil (6,2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating q_soil!"
+	 allocate (v_soil (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating v_soil!"
+	 allocate (amm_q (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating amm_q!"
+	 allocate (nit_q (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating nit_q!"
+	 allocate (TN_q (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating TN_q!"
+	 allocate (TP_q (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating TP_q!"
+	 allocate (IC_q (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating IC_q!"
+	 allocate (TC_q (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating TC_q!"
+	 allocate (detach_soil (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating detach_soil!"
+	 allocate (depos_soil (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating depos_soil!"
+	 allocate (add_soil (6,nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating add_soil!"
+	 allocate (ammonium (2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating ammonium!"
+	 allocate (nitrate (2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating nitrate!"
+	 allocate (phosphorus (2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating phosphorus!"
+	 allocate (v (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating v!"
+	 allocate (excess (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating excess!"
+	 allocate (cum_inf (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating cum_inf!"
+	 allocate (cum_drain (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating cum_drain!"
+	 allocate (stmax (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating stmax!"
+	 allocate (r2 (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating r2!"
+	 allocate (add (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating add!"
+	 allocate (addammonium (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating addammonium!"
+	 allocate (addnitrate (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating addnitrate!"
+	 allocate (addphosphorus (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating addphosphorus!"
+	 allocate (theta (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating theta!"
+	 allocate (dup (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating dup!"
+	 allocate (qin (2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating qin!"
+	 allocate (v1 (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating v1!"
+	 allocate (qsum (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating qsum!"
+	 allocate (y_amm (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating y_amm!"
+	 allocate (y_nit (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating y_nit!"
+	 allocate (y_phos (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating y_phos!"
+	 allocate (dmax (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating dmax!"
+	 allocate (vmax (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating vmax!"
+	 allocate (ks (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating ks!"
+	 allocate (psi (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating psi!"
+	 allocate (ff (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating ff!"
+	 allocate (drain_par (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating drain_par!"
+	 allocate (ksat (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating ksat!"
+	 allocate (pave (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating pave!"
+	 allocate (rmask (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating rmask!"
+	 allocate (sed_propn (6, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating sed_propn!"
+	 allocate (splash_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating splash_tot!"
+	 allocate (sed_temp (6, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating sed_temp!"
+	 allocate (sedch (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating sedch!"
+	 allocate (zs (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating zs!"
+	 allocate (sed_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating sed_tot!"
+	 allocate (amm_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating amm_tot!"
+	 allocate (nit_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating nit_tot!"
+	 allocate (TN_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating TN_tot!"
+	 allocate (TP_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating TP_tot!"
+	 allocate (IC_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating IC_tot!"
+	 allocate (TC_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating TC_tot!"
+!	 allocate (z (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating z!"
+	 allocate (area (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating area!"
+	 allocate (contrib (nr2, nc2), source = 0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating contrib!"
+	 allocate (d_thresh (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating d_thresh!"
+	 allocate (detach_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating detach_tot!"
+	 allocate (depos_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating depos_tot!"
+	 allocate (net_erosion_season (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating net_erosion_season!"
+	 allocate (z_change (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating z_change!"
+	 allocate (raindrop_detach_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating raindrop_detach_tot!"
+	 allocate (flow_detach_tot (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating flow_detach_tot!"
+	 allocate (vmax_soil (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating vmax_soil!"
+	 allocate (dmax_soil (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating dmax_soil!"
+	 allocate (cum_inf_p (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating cum_inf_p!"
+	 allocate (ps_init_ave (6, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating ps_init_ave!"
+	 allocate (grav (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating grav!"
+	 allocate (fines (nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating fines!"
+!
+!JWMar2017 added to allow Crank-Nicolson sediment routing
+!
+	 allocate (qsedin (6,2, nr2, nc2), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating qsedin!"

@@ -1,0 +1,16 @@
+Parameter specification for interstorm calculation, Mahleran 1.01.5
+./Input/input_p2/Interstorm/ ! path for interstorm input data
+./Output/ ! path for interstorm output data
+2010  #tstart; start year of simulation
+2011  #tstop; end year of simulation
+3	  #mstart:start month of first year
+8	#mstop: end month of last year
+Sev_temp.dat	#cont_temp_file; name of continuous temperature file, must be exactly 8 characters!
+Sev_rain.dat	#cont_rain_daily_file; name of continuous rainfall file, must be exactly 8 characters!
+Met_rain.dat	#cont_rain_daily_file; rainfall series in 1-min resolution
+shrub_cv.asc ! shrub_cov_file; name of file for percentage shrub cover, must be exactly 8 characters!
+0.593	#latitude: latidue of site in radians
+150.      # depth_1: depth of upper layer in mm
+150.      # depth_2: depth of deeper layer in mm
+
+

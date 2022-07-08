@@ -1,0 +1,198 @@
+function [stats] = hydroplot2 (run_no, cf_file)
+
+i = run_no;
+   if i < 10
+       filename=strcat('hydro00', num2str(i,'%1i'), '.dat');
+       qdocfile=strcat('dschg00', num2str(i,'%1i'), '.doc');
+       qimgfile=strcat('dschg00', num2str(i,'%1i'), '.img');
+   elseif i < 100
+       filename=strcat('hydro0', num2str(i,'%2i'), '.dat');
+       qdocfile=strcat('dschg0', num2str(i,'%2i'), '.doc');
+       qimgfile=strcat('dschg0', num2str(i,'%2i'), '.img');
+   elseif i < 1000
+       filename=strcat('hydro', num2str(i,'%3i'), '.dat');
+       qdocfile=strcat('dschg', num2str(i,'%3i'), '.doc');
+       qimgfile=strcat('dschg', num2str(i,'%3i'), '.img');
+   end
+
+[t rain q q1 q2 q3 d1 d2 d3 v1 v2 v3] = textread (filename, '%f %f %f %f %f %f %f %f %f %f %f %f ', -1);
+q = q / 1000000;
+
+if exist (cf_file, 'file')
+    [t1 q_cf] = textread (cf_file, '%f %f', -1);
+else
+    t1 = 0;
+    q_cf = 0;
+end
+
+if length (t1) > 1;
+    step = t1 (2) - t1 (1)
+    q_cf1 = zeros (size (q_cf));
+    q_cf1 (1) = 0.;
+    l = 2;
+    last_cf = size (q_cf1);
+    last_point = (length (t) - step);
+    j = 1;
+    m = 3;
+    while (l < length (q_cf1))
+        for k = 0: step-1;
+            q_cf1 (l) = q_cf1 (l) + q (j + k);
+        end;
+        q_cf1 (l) = q_cf1 (l) / step;
+        l = l + 1;
+        j = j + 1;
+        if m <= length (t1)
+           step = t1 (m) - t1 (m - 1);
+           m = m + 1;
+       end
+    end
+        
+%    for j = 1: step :last_point;
+%        for k = 0: step-1;
+%            q_cf1 (l) = q_cf1 (l) + q (j + k);
+%        end;
+%        q_cf1 (l) = q_cf1 (l) / step;
+%        l = l + 1;
+%        if l > last_cf break, end
+%    end;
+
+    variance_resid = sum ((q_cf - (60. * q_cf1)) .^ 2);
+    variance_q = sum ((q_cf - mean (q_cf)) .^ 2);
+    rms = sqrt (variance_resid / length (q_cf))
+    norm_rms = 100 * rms / mean (q_cf)
+    if sum (q_cf1) > 0;
+        r = corrcoef ([q_cf q_cf1]);
+        r2 = r (2, 1) .^ 2
+    else;
+        r2 = 0
+    end;
+    nash_sutcliffe = 1 - (variance_resid / variance_q)
+    line3 = strcat('RMS error =', '  ', num2str(round (rms * 100) / 100), ' l');
+    line4 = strcat('normalized RMS error =', '  ', num2str(round (norm_rms * 10) / 10), ' %');
+    line5 = strcat('r^{2} =', '  ', num2str(round (r2 * 1000) / 1000));
+    line6 = strcat('N-S efficiency =', '  ', num2str(round (nash_sutcliffe * 100) / 100));
+    modelled_max = max (q_cf1);
+else;
+    q_cf1 = zeros (size (q_cf));
+    rms = 0
+    norm_rms = 0
+    r2 = 0
+    nash_sutcliffe = 0
+    line3 = 'No measured data';
+    line4 = '- not possible to';
+    line5 = '  calculate errors';
+    line6 = '';
+    modelled_max = max (q);
+end;    
+
+stats = [sum(q) max(q_cf) modelled_max rms norm_rms r2 nash_sutcliffe];
+    
+hold off;
+clf;
+
+t_min = min (t);
+t_max = max (t);
+t1_max = max (t1);
+t_max = max (t_max, t1_max);
+rain_max = max (rain);
+q_max = max (q);
+q1_max = max (q_cf);
+q_max = max (q_max, q1_max);
+if q_max == 0;
+    q_max = .1;
+end;
+
+subplot(1,1,1); 
+q_sum = round ((sum (q)) * 10)/10;
+%q_var = round (((std (sum (all_q))) / 1000000) * 100) / 100;
+%q_meas_sum = round ((sum (q_cf) * 60.) * 10.) / 10.;
+q_meas_sum = round ((sum (q_cf)) * 10.) / 10.;
+plot (t1, q_cf, '-xr', 'MarkerSize', 10);xlim([t_min t_max]);ylim([0 q_max*2.]);axis('xy')
+xlabel ('time  s');
+ylabel ('plot discharge  l s^-^1');
+hold on;
+plot(t, q*60)
+plot (t1, q_cf1*60, ' ob', 'MarkerSize', 5);
+%plot (t1, q_cf1, ' ob', 'MarkerSize', 5);
+%plot (t1, q_cf1, ' ob', 'MarkerSize', 5);
+line1 = strcat('Measured total runoff =', '  ', num2str(q_meas_sum), ' l');
+line2 = strcat('Modelled total runoff =', '  ', num2str(q_sum), ' l');
+legend(line1, line2, line3, line4, line5, line6, 3);
+legend('boxoff');
+pause; 
+
+h1 = gca;
+h2 = axes('Position',get(h1,'Position'));
+
+area(t,rain*3600);xlim([t_min t_max]);ylim([0 max(rain)*2.5*3600]);axis('ij')
+set(h2,'YAxisLocation','right','Color','none','XTickLabel',[])
+set(h2,'XLim',get(h1,'XLim'),'Layer','top')
+rain_sum = round (sum (rain) * 10.)/10.;
+%text(50, .75*max(rain)*3600, strcat('Total rainfall =', '  ', num2str(rain_sum, '%3g'), ' mm'));
+ylabel ('rainfall  mm h^-^1');
+legend(strcat('Total rainfall =', '  ', num2str(rain_sum, '%3g'), ' mm'), 0);
+
+%subplot(5,2,9);
+%axes ('Position', [0.1300 0.0700 0.3270 0.1900]);
+%plot(t,v1,t,v2,t,v3);xlim([t_min t_max])
+%xlabel ('time  s');
+%str1(1) = {'mean velocity  mm s^-^1'};
+%ylabel (str1);
+%legend ('25%', '50%', '75%',2);
+%get(gca,'Position')
+
+
+%subplot(5,2,7);
+%axes ('Position', [0.1300 0.2600 0.3270 0.1900]);
+%plot(t,d1,t,d2,t,d3);xlim([t_min t_max])
+%xlabel ('time  s');
+%set(gca,'XTickLabel',{'';});
+%str1(1) = {'mean depth  mm'};
+%ylabel (str1);
+%legend ('25%', '50%', '75%',2);
+%get(gca,'Position')
+
+%subplot(5,2,5);
+%axes ('Position', [0.1300 0.4500 0.3270 0.1900]);
+%plot(t,q1/1000000,t,q2/1000000,t,q3/1000000);xlim([t_min t_max])
+%xlabel ('time  s');
+%set(gca,'XTickLabel',{'';});
+%str1(1) = {'section discharge  l s^-^1'};
+%ylabel (str1);
+%legend ('25%', '50%', '75%',2);
+%get(gca,'Position')
+
+%cols = ncol(qdocfile);
+%rows = nrow(qdocfile);
+%x_min = 0.5;
+%x_max = 0.5 * cols;
+%y_min = 0.5;
+%y_max = 0.5 * rows;
+
+%Z = zeros(rows, cols);
+
+%DATA = textread(qimgfile,'%f',-1);
+
+%xi = zeros (size (DATA));
+%yi = zeros (size (DATA));
+
+%k = 1;
+%for i = 1:rows
+%    for j = 1:cols
+%        Z (i, j) = DATA((i - 1) * cols + j);
+%        xi (k) = 0.5 * j;
+%        yi (k) = 0.5 * i;
+%        k = k + 1;
+%    end
+%end
+
+%x = linspace (x_min, x_max, cols);
+%y = linspace (y_max, y_min, rows);
+
+%[X Y] = meshgrid (x, y);
+%colormap jet;
+%subplot(1,2,2);imagesc(xi, yi, Z/1000000);axis ('equal','tight');
+%colorbar;
+%title('total discharge  l');
+
+hold off

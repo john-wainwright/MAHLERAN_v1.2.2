@@ -1,0 +1,17 @@
+"Rainfall time series in 1-min resolution (year, month, day, hour, minute, rain in mm/min)"					
+Please write -9999 to mark the end of the time series					
+2000	1	5	13	2	3
+2000	1	5	13	3	4
+2000	1	5	13	4	5
+2000	1	5	13	5	4
+2000	1	5	13	6	5
+2000	1	5	13	7	4
+2000	1	8	8	0	5
+2000	1	8	8	1	3
+2000	1	8	8	5	4
+2000	1	8	8	11	5
+2000	1	10	17	5	4
+2000	1	10	17	6	5
+2000	1	10	17	7	4
+2000	1	10	18	0	5
+-9999	-9999	-9999	-9999	-9999	-9999

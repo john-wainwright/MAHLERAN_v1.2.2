@@ -1,0 +1,74 @@
+Parameter specification for Mahleran Version 1.01.4
+./Input/input_p2/
+./Output/
+p2dem
+p2vegcover
+p2_07_09_05.dat
+p2ksat070905a
+rm_new
+p2pavcoverveg
+p2vegcover
+1
+4
+1
+0.04  0.3   0.17   0.2
+0.00  0.0088   0.0083   0.0083
+50  50   50   50
+0   1   1   1
+0.05   0.05   0.05   0.05
+0.0   0.1   0.1   0.1
+p2sm070905wet+4
+thetasat39
+0.5  1   1   1
+3
+20   26   120   1.5
+0.0   10   20   0.3
+4
+7500
+22.85 0   0                                            
+4
+1
+1.0
+1
+2.65
+152.0d-6   250.d-6 Note zero here switches off conc erosion
+plot2_phi1
+plot2_phi2
+plot2_phi3
+plot2_phi4
+plot2_phi5
+plot2_phi6
+0.0d0  0.0d0  0.0d0  0.0d0  0.0d0  0.0d0
+12.5   14.95  61.
+3.E-5  7E-5  4.E-5
+4.38E-05 8.31E-04 5.25E-04 8.31E-04 8.31E-05 8.75E-06
+1.24d0 1.08d0 .79d0 0.75d0 0.75d0 0.5d0
+.23d0 .21d0 .11d0 1.06d0 0.1d0 0.1d0
+1.d3 1.d3 1.d3 1.d3 1.d3 1.d3
+14.49275 10.98901 12.04819 12.34568 40.0 1000.0 
+0.019 0.016 0.007 0.003 0.000 0.000
+0.002 0.002 0.003 0.002 0.000 0.000
+3.065 2.249 1.260 0.720 0.000 0.000
+0.918 0.650 0.592 0.451 0.000 0.000
+8.933 6.300 4.150 2.550 0.000 0.000
+31.628 29.858 13.250 6.725 0.000 0.000
+0.355 0.238 0.007
+
+
+
+cEva:set parameter for phi=6 to zero as in Wainwright 1995
+c	use parameters of phi=4 for phi=5	
+       data spa / 9.d-6 6.d-5 5.d-4 1.d-5 1.d-5 0.0d0 /
+       data spb / 1.35d0 1.16d0 .84d0 1.35d0 1.1d0 0.0d0 /
+       data spc / .27d0 .25d0 .13d0 0.27d0 1.0d0 0.0d0 /
+c
+c  Data values below optimized for WG in Wainwright et al. 1999 (ESPL)
+cbq  Aren't the following values dependent on soil type.  If so they should be
+cbq  given as inputs by the user and not be hardcoded.
+c       data spa / 5.d-6 9.5d-5 6.d-5 9.5d-5 9.5d-6 1.d-6 /
+c       data spb / 1.24d0 1.08d0 .79d0 1.14d0 1.75d0 2.5d0 /
+c       data spc / .23d0 .21d0 .11d0 1.06d0 1.75d0 2.5d0 /
+Line with spd values are based on Savat and Poesen for phi=1-4 and extrapolated for phi=56
+Exponents from S+P are 0.069 0.091 0.083 0.081 with extrapolations to 0.025 and 0.001
+These give 1/(S+P value) at:
+14.49275 10.98901 12.04819 12.34568 40.0 1000.0 

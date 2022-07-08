@@ -1,0 +1,14 @@
+	 allocate (temp (366, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating temp in allocat_general!"
+	 allocate (precip (366, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating precip!"
+	 allocate (preciph (366*24, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating preciph in allocat_general!"
+	 allocate (pet (366, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating pet in allocat_general!"
+	 allocate (rad (366, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating rad in allocat_general!"
+	 allocate (rhum (366, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating rhum in allocat_general!"
+	 allocate (wind (366, subasin), source = 0.0d0, stat = ierr)
+         if ( ierr /= 0 ) stop "Memory error allocating wind in allocat_general!"

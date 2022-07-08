@@ -1,0 +1,302 @@
+ ------------------------------------------------------------------------------
+ Starting to read Mahleran input file: Laurap1                                                                         
+ File for model version: 1.2.1                                                                           
+ Model type:            1
+ Model run type: event                                                                           
+ Time_step:    1.0000000000000000     
+ Input folder: .\Input\input_p1\                                                                                   
+ Output folder: .\Output\                                                                                           
+ DEM file: p1dem.asc                                                                       
+ Rainfall data: p1_01_08_06.dat                                                                 
+ Rainfall-scaling map: rm_new.asc                                                                      
+ Vegetation-cover map: p1vegcover.asc                                                                  
+ Pavement map: p1pavcoverveg.asc                                                               
+ Surface-type map: p1_surface_type.asc                                                             
+ Rain_type:            2
+ Stormlength:    1630.0000000000000     
+ Mean_rainfall:    138.10679999999999     
+ Std_dev_rainfall:    0.0000000000000000     
+ Skewness_rainfall:    0.0000000000000000     
+ Infiltration model:            2
+ Final_infiltration map: p1ksat290806.asc                                                                
+ Suction map:                                                                                 
+ Drainage-map map:                                                                                 
+ Infiltration-parameter type:            2
+ Drainage-parameter type:            4
+ Number of surface types:            1
+ Final infiltration rate mean: by_surface_type
+ Type            1 :    2.5000000000000001E-004
+ Completed reading final infiltration rate mean
+ Final infiltration rate std dev: by_surface_type
+ Type            1 :    1.0000000000000000E-003
+ Completed reading final infiltration rate std dev
+ Wetting-front suction mean: by_surface_type
+ Type            1 :    46.600000000000001     
+ Completed reading wetting-front suction mean
+ Wetting-front suction std dev: by_surface_type
+ Type            1 :   0.10000000000000001     
+ Completed reading wetting-front suction std dev
+ Drainage parameter mean: by_surface_type
+ Type            1 :    5.0000000000000003E-002
+ Completed reading drainage parameter mean
+ Drainage parameter std dev: by_surface_type
+ Type            1 :    0.0000000000000000     
+ Completed reading drainage parameter std dev
+ Initial soil moisture mean: by_surface_type
+ Type            1 :   0.25000000000000000     
+ Completed reading initial soil moisture mean
+ Initial soil moisture std dev: by_surface_type
+ Type            1 :    0.0000000000000000     
+ Completed reading initial soil moisture std dev
+ Soil thickness: by_surface_type
+ Type            1 :   0.29999999999999999     
+ Completed reading soil thickness
+ Initial_soil-moisture_map: p1sm290905.asc                                                                  
+ Saturated_soil-moisture_map: thetasat39.asc                                                                  
+ Use_final_infiltration_map:  F
+ Use_suction_map:  F
+ Use_drainage_map:  F
+ Use_initial_soil_moisture_map:  F
+ Use_saturated_soil_moisture_map:  T
+ Final_infiltration_rate_distribution: normal       
+ WettingFrontSuctionDistribution: deterministic
+ Drainage_parameter_distribution: deterministic
+ Initial_soil_moisture_distribution: deterministic
+ Saturated_soil_moisture_distribution: deterministic
+ Flow_direction:            4
+ flow-routing_solution_method:            1
+ Friction_factor_type:            1
+ Friction_factor_map:                                                                                 
+ Friction factor mean: by_surface_type
+ Type            1 :    21.449999999999999     
+ Completed reading friction factor mean
+ Friction factor std dev: by_surface_type
+ Type            1 :    0.0000000000000000     
+ Completed reading friction factor std dev
+ Use_friction_factor_map:  F
+ Friction_factor_distribution: deterministic
+ Particle-size map: by_particle_size
+ phi            1 :                                                                                 
+ phi            2 :                                                                                 
+ phi            3 :                                                                                 
+ phi            4 :                                                                                 
+ phi            5 :                                                                                 
+ phi            6 :                                                                                 
+ Unknown parameter in file: phi_1
+ Unknown parameter in file: phi_2
+ Unknown parameter in file: phi_3
+ Unknown parameter in file: phi_4
+ Unknown parameter in file: phi_5
+ Unknown parameter in file: phi_6
+ Completed reading mean particle size
+ Particle size std dev: by_surface_type
+ Type            1 : 1
+ phi            1 :    0.0000000000000000     
+ phi            2 :    0.0000000000000000     
+ phi            3 :    0.0000000000000000     
+ phi            4 :    0.0000000000000000     
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particle size std dev
+ Particle_density:    2.6499999999999999     
+ Raindrop detachment a parameter size: by_particle_size
+ phi            1 :    4.2500000000000003E-005
+ phi            2 :    8.0699999999999999E-004
+ phi            3 :    5.1000000000000004E-004
+ phi            4 :    8.0699999999999999E-004
+ phi            5 :    8.0699999999999996E-005
+ phi            6 :    8.4900000000000000E-006
+ Completed reading raindrop detachment a parameter size
+ Raindrop detachment b parameter size: by_particle_size
+ phi            1 :    1.2000000000000000     
+ phi            2 :    1.0800000000000001     
+ phi            3 :   0.79000000000000004     
+ phi            4 :   0.75000000000000000     
+ phi            5 :   0.75000000000000000     
+ phi            6 :   0.50000000000000000     
+ Completed reading raindrop detachment b parameter size
+ Raindrop detachment c parameter size: by_particle_size
+ phi            1 :   0.23000000000000001     
+ phi            2 :   0.20999999999999999     
+ phi            3 :   0.11000000000000000     
+ phi            4 :    1.0600000000000001     
+ phi            5 :   0.10000000000000001     
+ phi            6 :   0.10000000000000001     
+ Completed reading raindrop detachment c parameter size
+ Raindrop detachment d parameter size: by_particle_size
+ phi            1 :    9.8439999999999994     
+ phi            2 :    7.4640000000000004     
+ phi            3 :    8.1839999999999993     
+ phi            4 :    8.3859999999999992     
+ phi            5 :    27.170000000000002     
+ phi            6 :    679.20000000000005     
+ Completed reading raindrop detachment d parameter size
+ Raindrop detachment max parameter size: by_particle_size
+ phi            1 :    1000.0000000000000     
+ phi            2 :    1000.0000000000000     
+ phi            3 :    1000.0000000000000     
+ phi            4 :    1000.0000000000000     
+ phi            5 :    1000.0000000000000     
+ phi            6 :    1000.0000000000000     
+ Completed reading raindrop detachment max parameter size
+ sediment-routing_solution_method:            2
+ Update_topography: n
+ Topography_update_interval:    1.0000000000000000     
+ Particle_density:    2.6499999999999999     
+ Active_layer_sensitivity:    1.5200000000000001E-006
+ Cs_NH4:    12.500000000000000     
+ Cs_NO3:    14.949999999999999     
+ Cs_PO:    61.000000000000000     
+ Mass-transfer_coefficient_NH4:    3.0000000000000001E-005
+ Mass-transfer_coefficient_NO3:    6.9999999999999994E-005
+ Mass-transfer_coefficient_PO:    4.0000000000000003E-005
+ Particulate bound NH4: by_particle_size
+ phi            1 :    1.9000000000000000E-002
+ phi            2 :    1.6000000000000000E-002
+ phi            3 :    7.0000000000000001E-003
+ phi            4 :    3.0000000000000001E-003
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particulate bound NH4
+ Particulate bound NO3: by_particle_size
+ phi            1 :    2.0000000000000000E-003
+ phi            2 :    2.0000000000000000E-003
+ phi            3 :    3.0000000000000001E-003
+ phi            4 :    2.0000000000000000E-003
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particulate bound NO3
+ Particulate bound TN: by_particle_size
+ phi            1 :    3.0649999999999999     
+ phi            2 :    2.2490000000000001     
+ phi            3 :    1.2600000000000000     
+ phi            4 :   0.71999999999999997     
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particulate bound TN
+ Particulate bound TP: by_particle_size
+ phi            1 :   0.91800000000000004     
+ phi            2 :   0.65000000000000002     
+ phi            3 :   0.59199999999999997     
+ phi            4 :   0.45100000000000001     
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particulate bound TP
+ Particulate bound IC: by_particle_size
+ phi            1 :    8.9329999999999998     
+ phi            2 :    6.2999999999999998     
+ phi            3 :    4.1500000000000004     
+ phi            4 :    2.5499999999999998     
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particulate bound IC
+ Particulate bound TC: by_particle_size
+ phi            1 :    31.628000000000000     
+ phi            2 :    29.858000000000001     
+ phi            3 :    13.250000000000000     
+ phi            4 :    6.7249999999999996     
+ phi            5 :    0.0000000000000000     
+ phi            6 :    0.0000000000000000     
+ Completed reading particulate bound TC
+ Rainfall_dissolved_NH4_conc:   0.23000000000000001     
+ Rainfall_dissolved_NO3_conc:   0.21199999999999999     
+ Rainfall_dissolved_PO_conc:    1.0999999999999999E-002
+ KE_model_type is Vertraeten et al. (2001) for Belgium (apologies)
+ Verbose output is turned off 
+ Within storm output is turned off 
+ Within storm interval is    60.000000000000000       s
+ ---------------------------------------------
+ Mahleran_continuous: data for continuous runs
+ Interstorm_input_folder: C:\John\Programs\Gustav_V1\Input\Interstorm_abbott\                             
+ start_year:         2010
+ End_year:         2011
+ Start_month:            1
+ End_month:           12
+ Continuous_temperature_data: Sev_temp.dat                                                                    
+ Continuous_rainfall_data: Met_rain.dat                                                                    
+ One-min_rainfall_data: Met_rain.dat                                                                    
+ Shrub-cover_map: shrub_cv.asc                                                                    
+ Threshold_rain:    5.0000000000000000     
+ Latitude:   0.59299999999999997     
+ Latitude in degrees:    34.000000000000000     
+ Depth_of_upper_layer:    150.00000000000000     
+ Depth_of_lower_layer:    150.00000000000000     
+ Residual_water_content:    2.9999999999999999E-002
+ Water_content_for_stomatal_closure:   0.20000000000000001     
+ Crusting_evapotranspiration_reduction:    1.0000000000000000     
+ Infiltration_from_bare_to_layer_2:   0.10000000000000001     
+ Infiltration_from_shrub_to_layer_2:   0.10000000000000001     
+ Ksat:   0.59999999999999998     
+ Diffusion_coefficient:    1.0000000000000000E-002
+ Initial_value_for_sm_1:    10.000000000000000     
+ Initial_value_for_sm_2:    10.000000000000000     
+ End of Mahleran_continuous: data for continuous runs
+ ---------------------------------------------
+ ---------------------------------------------
+ Mahleran MiC input: 
+ Marker_file: rfid_2014_markers_1200.asc                                                      
+ End of Mahleran MiC input
+ ---------------------------------------------
+ ---------------------------------------------
+ Mahleran_output_files: 
+ aspectfileimg:  T
+ contrib:  F
+ d_xsect:  F
+ depfileimg:  F
+ detfileimg:  T
+ dfileimg:  T
+ dischfile:  F
+ dmapfile:  T
+ flowdetimg:  F
+ hydrofile:  T
+ hypointsfile:  F
+ inundfile:  F
+ ksat:  T
+ markerfileimg:  F
+ markerofffile:  F
+ mstatusfile:  F
+ MXYfile:  F
+ neterosimg:  T
+ nutpointfile:  F
+ nutrientfile:  F
+ nutrifileimg:  F
+ nitratefileimg:  F
+ phosfileimg:  F
+ order:  F
+ p_ammoniumimg:  F
+ p_ICimg:  F
+ p_nitrateimg:  F
+ p_nutfile:  F
+ p_TCimg:  F
+ p_TNimg:  F
+ p_TPimg:  F
+ paramfile:  T
+ pave:  T
+ q_xsect:  F
+ qfileimg:  T
+ qpointfile:  F
+ qspointfile:  F
+ raindetimg:  F
+ rainmask:  F
+ sedconcfile:  F
+ seddeposfile:  F
+ seddepthfile:  F
+ seddetfile:  F
+ seddischfile:  T
+ sedfile:  T
+ sedfileimg:  T
+ sedpropnfile:  F
+ sedvelfile:  F
+ shrubland_xsect:  F
+ slope:  F
+ soildepfileimg:  F
+ soilvelfileimg:  F
+ thetafileimg:  T
+ topog:  F
+ v_xsect:  F
+ veg:  F
+ vfileimg:  T
+ End of Mahleran_output_files
+ ---------------------------------------------
+ End of Mahleran input file
+ ------------------------------------------------------------------------------

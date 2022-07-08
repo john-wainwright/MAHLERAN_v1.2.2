@@ -1,0 +1,333 @@
+c****************************************************************
+c  subroutine to define sediment flow routing
+c****************************************************************
+       subroutine route_sediment
+
+	 use shared_data
+  	 implicit double precision (a - h, o - z)
+       implicit integer (i - n)
+	
+       logical check	
+cEva	uc: unit converter from fluxes (mm2/s * cell width [mm] * density [g/cm3] to g
+cJWJan2006 other variables for calculating flow detachment component in transitional regime
+	 double precision rain_det_temp (6)
+	 double precision uc, re
+c
+c   MAIN LOOP to define detachment and mode of transport for each cell
+c
+cJWAug05	 do im = 2, nr2 
+cJWAug05	    do jm = 2, nc2  
+	 do im = 1, nr1 
+	    do jm = 1, nc1
+c
+c   only calculate if rmask not set to blank (-9999)
+c
+	       if (rmask (im, jm).ge.0.0d0) then
+c
+c   feedback with coarse particles as in Wainwright et al. ESPL 1995
+c
+c                grav_propn = -6.0d0 * (sed_propn (5, im, jm) + 
+c     &                       sed_propn (6, im, jm))
+c   	          if (grav_propn.gt.0.0d0) then
+c	             write (6, *) ' grav_propn: ', grav_propn
+c	          endif
+cJWAug2005  No feedback
+                grav_propn = 0.0d0
+c
+c   is there overland flow in the current cell?
+                if (d (1, im, jm).gt.0.0d0) then
+c   ... then prepare for concentrated/suspended flow by calculating d50 and shear velocity
+cLTOct2007 dsum is the proportion total sediment in each size class
+                   dsum = 0.0d0
+	             dsumlast = 0.0d0
+  	             d50 = -9999.d0
+	             do phi = 1, 6
+	                dsum = dsum + sed_propn (phi, im, jm)
+	                if (dsum.ge.0.5d0.and.dsumlast.lt.0.5d0) then
+ 	                   if (phi.eq.1) then
+	                      d50 = (diameter (1) / dsum) * 0.5d0
+	                   else
+	                      d50 = diameter (phi - 1) + 
+     &                            ((diameter (phi) - diameter (phi - 1)) 
+     &                         / (dsum - dsumlast)) * (0.5d0 - dsumlast)
+	                   endif
+	                   exit
+	                endif
+	                dsumlast = dsum
+	             enddo
+	             if (d50.lt.0.0d0) then
+	                d50 = diameter (6)
+	             endif
+c      9.81d-3 is used to muliply by g and convert d from mm to m
+	             ustar = sqrt (9.81d-3 * d (1, im, jm) * 
+     &                     slope (im, jm))
+c   ...if so, check for concentrated flow using a Re>=2500 criterion (i.e. turbulence)
+cJWFeb05   Re>=2500 criterion (i.e. turbulence)
+c      1.d-6 converts v*d from mm^2/s to m^2/s
+	             re = (1.d-6 * v (im, jm) * d (1, im, jm)) / viscosity
+
+cJWFeb05   Re>=2500 criterion (i.e. turbulence)
+                   if (re.gt.2500.0d0) then
+	
+c   ...if so, detachment is by the flow
+ 	                call flow_detachment
+c   ...and then check for suspension
+					do phi = 1,6
+	                   dstar = diameter (phi) * dstar_const
+c	from van Rijn (1984): Sediment transport, Part II: Suspended load Transport
+                         if (dstar.le.10) then
+                            susp_crit = (4.d0 * settling_vel (phi)) / 
+     &                                  dstar
+	                   else
+	                      susp_crit = 0.4d0 * settling_vel (phi)
+	                   endif
+	                   if (ustar.ge.susp_crit) then
+c   ...and if so, cause transport by suspension
+   	                      call suspended_transport
+ 	                   else
+c   ...otherwise, transport is by concentrated flow (bedload)
+                            call conc_flow_transport
+	                   endif
+	                enddo
+
+cJWFeb05   Re>=2500 criterion (i.e. turbulence)
+	             elseif (re.lt.2500.0d0.and.r2 (im, jm).gt.0.0d0) then
+c    ...flow is present but not concentrated -- thus detachment is by raindrops
+c       check whether suspension might still occur
+c       but if not, use unconcentrated flow algorithm
+	                call raindrop_detachment
+cJWJan2006
+cJWJan2006  add in transitional flow conditions with flow detachment
+cJWJan2006
+	                if (re.gt.500.d0) then
+	                   do phi = 1, 6
+                            rain_det_temp (phi) = 
+     &                                    detach_soil (phi, im, jm)
+                         enddo
+	                   call flow_detachment
+	                   do phi = 1, 6
+	                      detach_soil (phi, im, jm) = 
+     &                                  detach_soil (phi, im, jm) 
+     &                                      + rain_det_temp (phi)
+	                   enddo
+	                endif
+				    do phi = 1, 6
+cTEST	                   if (re.gt.500.d0) then
+cTEST                            call conc_flow_transport
+cTEST	                   else
+		                  call diffuse_flow_transport
+cTEST	                   endif
+	                enddo
+
+cJWMar06	                   dstar = diameter (phi) * dstar_const
+cJWMar06                         if (dstar.le.10) then
+cJWMar06                            susp_crit = (4.d0 * settling_vel (phi)) / 
+cJWMar06     &                                  dstar
+cJWMar06	                   else
+cJWMar06	                      susp_crit = 0.4d0 * settling_vel (phi)
+cJWMar06	                   endif
+cJWFeb05  No suspension if no turbulence??
+cJWFeb05	                   if (ustar.ge.susp_crit.and.
+cJWFeb05  ...or... lower depth limit for suspension?
+cJWFeb05     & 				      d (1, im, jm).gt.2.5d0) then
+cJWFeb05	                      call suspended_transport
+cJWFeb05	                   else
+cJWMar06	                   call diffuse_flow_transport
+cJWFeb05	                   endif
+cJWMar06	                enddo
+c	if re < 2500 and no rainfall
+cJWFeb05 avoid sudden drop in movement at end of event
+cJWFeb05				 elseif (re.lt.2500.and.r2 (im, jm).eq.0) then	
+				 elseif (re.lt.2500.and.r2 (im, jm).eq.0) then	
+cJWJan2006
+cJWJan2006  add in transitional flow conditions with flow detachment
+cJWJan2006
+cLTOct2007 added in phi do loop to stop model crashing undercertain conditions
+	                if (re.gt.500.d0) then
+	                   call flow_detachment
+	                   do phi = 1, 6
+					      call conc_flow_transport
+					   enddo
+	                else
+cJWJan2006
+cJWJan2006   otherwise no detachment
+cJWJan2006
+					   do phi=1,6
+					      detach_soil (phi, im, jm) = 0.0d0
+					      depos_soil (phi, im, jm) = 0.0d0
+c					       depos_soil (phi, im, jm) = 
+c     &                                   d_soil (phi, 1, im, jm) / dt
+				       enddo	
+	                endif
+	             endif
+c
+c   no flow in current cell.  Check if rainfall and calculate splash if so
+c
+                elseif (r2 (im, jm).gt.0.0d0) then
+ 	             call raindrop_detachment
+c
+c	Do NOT use kinematic wave approach for purely splash transport
+c
+cJWFeb05 checked above by definition                   if (d (1, im, jm).le.0.0d0) then
+			     call splash_transport
+c	             endif    
+		      endif
+	       endif
+		enddo
+	 enddo      
+
+c
+cEva:		Sediment Routing following kinematic wave approach (fluxes of sediments with virtual 
+c			travel rates v_soil, based on mass balance of sediments)
+c			d_soil(phi,1,im,jm): soil depth within water flow in current cell [mm]
+c			v_soil(phi,im,jm): virtual travel velocity [mm/s]
+c			q_soil(phi,1,im,jm): unit sediment discharge [mm2/s]
+c			detach_soil(phi,im,jm): detachment at a point [mm/s]
+c			depos: deposition at a point [mm/s]
+cLTOct2007	nutrient_phi (phi, 1, im, jm): nutrient concentration/flux per cell
+
+cJWAug05	 do im = 2, nr2 
+cJWAug05	    do jm = 2, nc2  
+	 do im = 1, nr1 
+	    do jm = 1, nc1
+c
+cj Eva's version with 2.5 mm depth threshold for flow routing
+c		   if (d (2, im, jm).gt.2.5d0.and.rmask (im, jm).ge.0.0d0) 
+c
+cj Flow routing for depths above 0.  
+c
+		   if (d (2, im, jm).gt.0.0d0.and.rmask (im, jm).ge.0.0d0) 
+     &           then
+			  do phi = 1, 6   
+c			change detach and depos from weight per cell to mm
+cJWFeb05  Convert back to rates (in mm/s) for kinematic wave calculations after conversion
+cJWFeb05     to total volume in subroutine flow_distribution         
+cJWAug05
+cJWAug05  test to see if converting to volume and then back to depth makes a difference
+cJWAug05
+cJWAug05			     detach_soil (phi, im, jm) = detach_soil (phi, im, jm)
+cJWAug05     &			  			          / (density * area (im, jm) * dt)
+cJWAug05			     depos_soil (phi, im, jm) = depos_soil (phi, im, jm)
+cJWAug05     &			 			          / (density * area (im, jm) * dt)
+cJWAug05
+cJWAug05  there is no difference, so these lines should remain commented out
+cJWAug05
+c
+			     d_soil (phi, 2, im, jm) = d_soil (phi, 1, im, jm) +
+     &		                             (detach_soil (phi, im, jm) -
+     &                                     depos_soil (phi, im, jm)) * 
+     &                                     dt + (dtdx * 
+     &                                     (add_soil (phi, im, jm) - 
+     &                                     q_soil (phi, 1, im, jm)))
+	 
+			     if (d_soil (phi, 2, im, jm).lt.0) then
+			        d_soil (phi, 2, im, jm) = 0.
+			     endif
+			     q_soil (phi, 2, im, jm) = d_soil (phi, 2, im, jm) *
+     &                                       v_soil (phi, im, jm)
+c
+cLTOct2007 Added routine to calculate the sediment-bound nutrient discharge for each phi class
+cLTOct2007 q_soil is in mm2/s. Use UC to conver to kg/s. P_nutreints in g/kg.  
+                   uc = dx * density * 1.e-6 * dt
+cLT multiplied q_soil by UC to get kg/s
+c			multiplied by nutrient conc (g/kg) to get g/s
+			     amm_q (phi, im, jm) = q_soil (phi, 2, im, jm) * UC 
+     &                				         * p_ammonium (phi)
+			     nit_q (phi, im, jm) = q_soil (phi, 2, im, jm) * UC 
+     &                				         * p_nitrate (phi) 
+			     TN_q (phi, im, jm) = q_soil (phi, 2, im, jm) * UC  
+     &                				         * p_TN (phi)
+			     TP_q (phi, im, jm) = q_soil (phi, 2, im, jm) * UC
+     &                				         * p_TP (phi)
+			     IC_q (phi, im, jm) = q_soil (phi, 2, im, jm) * UC
+     &                				         * p_IC (phi)
+			     TC_q (phi, im, jm) = q_soil (phi, 2, im, jm) * UC
+     &                				         * p_TC (phi)
+c
+cLTOct2007 TASK/QUESTION need to work out how to account for net deposition and erosion of soil nutrients
+c          Have an initial reserve of nutrients in the surface soil. This reserve is increased or decreased
+c          depending on removal or deposition of nutrients? Something like this will be needed for coupling with DAYCENT.
+c
+c	Calculation of total mass fluxes (all six soil classes) in kg 
+c	for spatial representation of sediment flux
+c
+cJWAug05  n.b. previous multiplication by uc = dx * density * 1.e-6 * dt
+cJWAug05       at each time step now moved to final output because dt is constant
+cJWAug05
+			     sed_tot (im, jm) = sed_tot (im, jm) + 
+     &                                q_soil (phi, 2, im, jm)
+	             detach_tot (im, jm) = detach_tot (im, jm) + 
+     &                                   detach_soil (phi, im, jm)
+	             depos_tot (im, jm) = depos_tot (im, jm) +
+     &                                  depos_soil (phi, im, jm)
+c
+cLTOct2007 Calculation of total mass fluxes (all six soil classes) for spatial 
+cLTOct2007 representation of nutrient flux in g
+c                   
+                   amm_tot (im, jm) = amm_tot (im, jm) +
+     &                                amm_q (phi, im, jm)	
+                   nit_tot (im, jm) = nit_tot (im, jm) +
+     &                                nit_q (phi, im, jm) 
+                   TN_tot (im, jm) = TN_tot (im, jm) +
+     &                               TN_q (phi, im, jm)  
+                   TP_tot (im, jm) = TP_tot (im, jm) +
+     &                               TP_q (phi, im, jm)                      
+                   IC_tot (im, jm) = IC_tot (im, jm) +
+     &                               IC_q (phi, im, jm) 
+                   TC_tot (im, jm) = TC_tot (im, jm) +
+     &                               TC_q (phi, im, jm) 
+			  enddo
+
+		   elseif (d (2, im, jm).le.0.0d0.and.rmask (im, jm).ge.0.0d0) then
+		  	  do phi = 1, 6
+			     d_soil (phi, 2, im, jm) = 0.0d0
+			     q_soil (phi, 2, im, jm) = 0.0d0
+c
+c   for splash-only case, add fluxes to total for output
+c
+cJWAug05  n.b. previous multiplication by uc = dx * density * 1.e-6 * dt
+cJWAug05       at each time step now moved to final output because dt is constant
+cJWAug05
+c
+                   sed_tot (im, jm) = sed_tot (im, jm) + 
+     &                                (detach_soil (phi, im, jm) -
+     &                                depos_soil (phi, im, jm))
+	             detach_tot (im, jm) = detach_tot (im, jm) + 
+     &                                   detach_soil (phi, im, jm)
+	             depos_tot (im, jm) = depos_tot (im, jm) +
+     &                                  depos_soil (phi, im, jm)
+cLTOct2007 add in sediment-bound nutrients
+                   amm_tot (im, jm) = amm_tot (im, jm) + 
+     &                                ((detach_soil (phi, im, jm) -
+     &                                depos_soil (phi, im, jm)
+     &                                * p_ammonium (phi)))
+                   nit_tot (im, jm) = nit_tot (im, jm) + 
+     &                                ((detach_soil (phi, im, jm) -
+     &                                depos_soil (phi, im, jm)
+     &                                * p_nitrate (phi)))   
+                   TN_tot (im, jm) = TN_tot (im, jm) + 
+     &                               ((detach_soil (phi, im, jm) -
+     &                               depos_soil (phi, im, jm)
+     &                               * p_TN (phi)))                      
+                   TP_tot (im, jm) = TP_tot (im, jm) + 
+     &                               ((detach_soil (phi, im, jm) -
+     &                               depos_soil (phi, im, jm)
+     &                               * p_TP (phi))) 
+                   IC_tot (im, jm) = IC_tot (im, jm) + 
+     &                               ((detach_soil (phi, im, jm) -
+     &                               depos_soil (phi, im, jm)
+     &                               * p_IC (phi))) 			  
+                   TC_tot (im, jm) = TC_tot (im, jm) + 
+     &                               ((detach_soil (phi, im, jm) -
+     &                               depos_soil (phi, im, jm)
+     &                               * p_TC (phi))) 			  
+			  enddo
+
+		   endif
+		enddo
+	 enddo
+
+
+
+       return
+       end
